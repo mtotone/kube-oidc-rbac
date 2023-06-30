@@ -1,9 +1,9 @@
 apiVersion: v2
-appVersion: 0.1.0
+appVersion: 0.1.1
 description: Helm chart used to manage Kubernetes RBAC with OIDC
 maintainers:
 - email: breart.antho@gmail.com
   name: mtotone
-name: kube-oic-rbac
+name: kube-oidc-rbac
 type: application
-version: 0.1.0
+version: 0.1.1
