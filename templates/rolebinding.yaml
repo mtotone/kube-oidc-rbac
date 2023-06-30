@@ -1,0 +1,36 @@
+{{- if and .Values.config.bindings }}
+{{- range $key, $value := .Values.config.bindings }}
+{{- if and .namespaces }}
+{{- range $value.namespaces }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $value.group }}___template-kube-oidc-rbac___{{ $value.name }}
+  namespace: {{ . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: template-kube-oidc-rbac___{{ $value.role }}
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: {{ $value.group }}
+{{- end }}
+{{- else }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ $value.group }}___template-kube-oidc-rbac___{{ $value.name }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: template-kube-oidc-rbac___{{ $value.role }}
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: {{ $value.group }}
+{{- end }}
+{{- end }}
+{{- end }}

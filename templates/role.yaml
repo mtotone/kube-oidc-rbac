@@ -1,0 +1,24 @@
+{{- range .Values.config.templates }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: template-kube-oidc-rbac___{{ .name }}
+rules:
+{{.rules | toYaml}}
+{{ else }}
+[]
+{{- end }}
+{{- if and .Values.config.extraTemplates }}
+{{- range .Values.config.extraTemplates }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: template-kube-oidc-rbac___{{ .name }}
+rules:
+{{.rules | toYaml}}
+{{ else }}
+[]
+{{- end }}
+{{- end }}

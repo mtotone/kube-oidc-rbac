@@ -1,0 +1,138 @@
+config:
+  bindings: []
+#    - name: editor
+#      role: editor
+#      group: editor
+#      namespaces:
+#      - namespace1
+#      - namespace2
+#    - name: portforward
+#      role: portforward
+#      group: editor
+#      namespaces:
+#      - namespace1
+#      - namespace2
+#    - name: namespace-viewer
+#      role: namespace-viewer
+#      group: editor
+#      namespaces: ""
+  templates:
+    - name: admin
+      rules:
+        - apiGroups:
+            - "*"
+          resources:
+            - "*"
+          verbs:
+            - "*"
+
+    - name: editor
+      rules:
+        - apiGroups:
+            - "*"
+          resources:
+            - "configmaps"
+            - "endpoints"
+            - "persistentvolumeclaims"
+            - "pods"
+            - "pods/log"
+            - "pods/portforward"
+            - "pods/exec"
+            - "pods/attach"
+            - "podtemplates"
+            - "replicationcontrollers"
+            - "resourcequotas"
+            - "secrets"
+            - "serviceaccounts"
+            - "services"
+            - "horizontalpodautoscalers"
+            - "cronjobs"
+            - "jobs"
+            - "events"
+            - "daemonsets"
+            - "deployments"
+            - "deployments/scale"
+            - "replicasets"
+            - "ingresses"
+            - "networkpolicies"
+            - "poddisruptionbudgets"
+            - "roles"
+            - "rolebindings"
+            - "certificates"
+            - "statefulsets"
+          verbs:
+            - "*"
+
+    - name: viewer
+      rules:
+        - apiGroups:
+            - "*"
+          resources:
+            - "configmaps"
+            - "endpoints"
+            - "limitranges"
+            - "persistentvolumeclaims"
+            - "pods"
+            - "pods/log"
+            - "pods/portforward"
+            - "pods/attach"
+            - "podtemplates"
+            - "replicationcontrollers"
+            - "resourcequotas"
+            - "services"
+            - "horizontalpodautoscalers"
+            - "cronjobs"
+            - "jobs"
+            - "events"
+            - "daemonsets"
+            - "deployments"
+            - "replicasets"
+            - "ingresses"
+            - "networkpolicies"
+            - "poddisruptionbudgets"
+          verbs:
+            - "get"
+            - "list"
+            - "watch"
+            - "read"
+
+    - name: portforward
+      rules:
+        - apiGroups:
+            - "*"
+          resources:
+            - "services"
+            - "pods"
+            - "pods/portforward"
+          verbs:
+            - "get"
+            - "list"
+        - apiGroups:
+            - "*"
+          resources:
+            - "pods/portforward"
+          verbs:
+            - "create"
+
+    - name: namespace-viewer
+      rules:
+        - apiGroups:
+            - "*"
+          resources:
+            - "namespaces"
+          verbs:
+            - "get"
+            - "list"
+            - "watch"
+  extraTemplates: []
+#    - name: extraTemplate
+#      rules:
+#        - apiGroups:
+#            - "*"
+#          resources:
+#            - "nodes"
+#            - "pods"
+#          verbs:
+#            - "get"
+#            - "list"
+#            - "watch"
